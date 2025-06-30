@@ -46,13 +46,19 @@ function App() {
     setCompleteTodos(newCompleteTodos);
   };
 
+  const isMaxLimitIncompleteTodos = incompleteTodos.length >= 5;
+
   return (
     <>
       <InputTodos
         todoText={todoText}
         onChangeTodoText={onChangeTodoText}
         onClickAdd={onClickAdd}
+        disabled={isMaxLimitIncompleteTodos}
       />
+      {isMaxLimitIncompleteTodos && (
+        <p style={{ color: "red" }}>お前仕事溜めすぎだろ。早くやれよ。</p>
+      )}
 
       <IncompleteTodos
         incompleteTodos={incompleteTodos}
@@ -60,9 +66,7 @@ function App() {
         onClickDelete={onClickDelete}
       />
 
-      <CompleteTodos
-        completeTodos={completeTodos}
-        onClickBack={onClickBack} />
+      <CompleteTodos completeTodos={completeTodos} onClickBack={onClickBack} />
     </>
   );
 }
